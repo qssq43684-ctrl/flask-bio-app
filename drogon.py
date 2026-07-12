@@ -4,14 +4,14 @@ import re
 
 app = Flask(__name__)
 
-# HTML from user (Fully customized for MEHDI - Premium Cyberpunk UI)
+# HTML with the new "Get EAT Token" button added near the token input
 HTML_TEMPLATE = """
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-<title> S7L MAHDI𓆪 LONG BIO</title>
+<title>𓆩𝕊̷7̷𝕃̷ 𝕄̷𝔸̷ℍ̷𝔻̷𝕀̷𓆪 LONG BIO</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
@@ -58,6 +58,12 @@ textarea:focus { border-color: #00ffc3; box-shadow: 0 0 15px rgba(0, 255, 195, 0
 input, select { width: 100%; padding: 14px 18px; margin-top: 12px; border-radius: 16px; background: #070913; border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; font-size: 14px; outline: none; transition: all 0.3s ease; -webkit-appearance: none; appearance: none; }
 select { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%2300ffc3'><polygon points='0,0 10,0 5,5'/></svg>"); background-repeat: no-repeat; background-position: right 18px center; padding-right: 40px; }
 input:focus, select:focus { border-color: #0099ff; box-shadow: 0 0 15px rgba(0, 153, 255, 0.15); }
+
+/* Input Group with Button */
+.input-btn-group { display: flex; gap: 8px; align-items: flex-end; width: 100%; }
+.input-btn-group input { flex: 1; }
+.get-token-btn { background: rgba(0, 255, 195, 0.1); border: 1px solid rgba(0, 255, 195, 0.4); color: #00ffc3; padding: 14px 16px; border-radius: 16px; font-weight: 600; cursor: pointer; font-size: 13px; height: 48px; margin-top: 12px; display: flex; align-items: center; justify-content: center; gap: 6px; white-space: nowrap; transition: all 0.2s ease; }
+.get-token-btn:hover { background: #00ffc3; color: #050508; border-color: #00ffc3; font-weight: 700; box-shadow: 0 0 15px rgba(0, 255, 195, 0.3); }
 
 /* Action Button */
 button#submitBtn { background: linear-gradient(90deg, #00ffc3, #0099ff); border: none; border-radius: 16px; padding: 14px; font-weight: 700; color: #050508; cursor: pointer; font-size: 15px; letter-spacing: 0.5px; transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(0, 255, 195, 0.25); }
@@ -125,9 +131,9 @@ button#submitBtn:disabled { background: #1e293b; color: #64748b; cursor: not-all
 <canvas id="matrix"></canvas>
 
 <div class="container">
-    <h1>𓆩𝕀S7L MAHDI𓆪 LONG BIO</h1>
+    <h1>𓆩𝕊̷7̷𝕃̷ 𝕄̷𝔸̷ℍ̷𝔻̷𝕀̷𓆪 LONG BIO</h1>
     <div class="subtitle">
-        <span class="api-badge">⚡ Powered by 𓆩S7L MAHDI𓆪</span>
+        <span class="api-badge">⚡ Powered by 𓆩𝕊̷7̷𝕃̷ 𝕄̷𝔸̷ℍ̷𝔻̷𝕀̷𓆪</span>
     </div>
     
     <div class="links">
@@ -136,13 +142,13 @@ button#submitBtn:disabled { background: #1e293b; color: #64748b; cursor: not-all
         <a href="https://t.me/AsaadYT2012" target="_blank"><i class="fas fa-user-friends"></i> Friend</a>
     </div>
 
-    <!-- 1. TEXT GRADIENT COLORS (Moved Here) -->
+    <!-- 1. TEXT GRADIENT COLORS -->
     <div class="card">
         <h3><i class="fas fa-palette"></i> Text Gradient Colors</h3>
         <div class="colors-ribbon" id="colorRibbon"></div>
     </div>
 
-    <!-- 2. FORMATTING TOOLS (Moved Here) -->
+    <!-- 2. FORMATTING TOOLS -->
     <div class="card">
         <h3><i class="fas fa-font"></i> Formatting Tools</h3>
         <div class="format-group">
@@ -154,7 +160,7 @@ button#submitBtn:disabled { background: #1e293b; color: #64748b; cursor: not-all
         </div>
     </div>
     
-    <!-- 3. BIO EDITOR (Now Below Colors & Formats) -->
+    <!-- 3. BIO EDITOR -->
     <div class="card">
         <h3><i class="fas fa-pen-nib"></i> Bio Editor</h3>
         <textarea id="bio" placeholder="Type or paste your bio description here..."></textarea>
@@ -180,14 +186,22 @@ button#submitBtn:disabled { background: #1e293b; color: #64748b; cursor: not-all
             <option value="US">🇺🇸 US - USA</option>
             <option value="EU">🇪🇺 EU - Europe</option>
         </select>
-        <input id="token" placeholder="Enter Account Token / UID string" autocomplete="off">
+        
+        <!-- Input Group: Token field + Get EAT Token button -->
+        <div class="input-btn-group">
+            <input id="token" placeholder="Enter Account Token / UID string" autocomplete="off">
+            <button type="button" class="get-token-btn" onclick="window.open('https://ticket.kiosgamer.co.id/', '_blank')">
+                <i class="fas fa-external-link-alt"></i> جلب EAT توكن
+            </button>
+        </div>
+        
         <input id="password" placeholder="Account Password" type="password" style="display:none;">
         <button id="submitBtn" onclick="handleSubmit()" style="width:100%; margin-top:16px;" disabled>🔒 Verify First</button>
     </div>
 </div>
 
 <script>
-// ========== MATRIX BACKGROUND (Custom S-7-L Letters) ==========
+// ========== MATRIX BACKGROUND ==========
 const canvas = document.getElementById("matrix");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
