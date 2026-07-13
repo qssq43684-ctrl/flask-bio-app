@@ -11,7 +11,7 @@ HTML_TEMPLATE = """
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-<title>𓆩𝕊̷7̷𝕃̷ 𝕄̷𝔸̷ℍ̷𝔻̷𝕀̷𓆪 LONG BIO</title>
+<title>𓆩S7L MAHDI !BIO𓆪 LONG BIO</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
